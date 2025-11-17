@@ -9,7 +9,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://carbon-footprint-tracker-blond.vercel.app"
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -28,7 +31,7 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1d";
 // DB CONNECT
 // -----------------------------
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Carbon_FootPrint_Tracker")
+  .connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("DB Error:", err));
 
