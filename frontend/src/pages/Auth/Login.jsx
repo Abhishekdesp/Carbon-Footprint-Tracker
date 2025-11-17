@@ -8,10 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) navigate("/dashboard");
-  }, []);
+
 
   const handleSubmit = async () => {
     console.log("LOGIN BUTTON CLICKED");
