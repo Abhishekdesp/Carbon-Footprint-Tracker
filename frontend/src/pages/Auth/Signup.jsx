@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -21,18 +22,15 @@ export default function Signup() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/signup`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
-          }),
-        }
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
 
       const data = await response.json();
 
@@ -50,20 +48,23 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen w-screen flex items-center justify-center 
-      bg-gradient-to-br from-green-900 via-blue-800 to-black p-4">
-
-      <div className="bg-gray-900 border border-green-500 
-        rounded-xl shadow-xl p-6 w-full max-w-sm pointer-events-auto">
-
+    <div
+      className="min-h-screen w-screen flex items-center justify-center 
+      bg-gradient-to-br from-green-900 via-blue-800 to-black p-4"
+    >
+      <div
+        className="bg-gray-900 border border-green-500 
+        rounded-xl shadow-xl p-6 w-full max-w-sm pointer-events-auto"
+      >
         <h2 className="text-2xl font-bold text-center mb-6 text-white">
           Create Account
         </h2>
 
         <div className="space-y-4">
-
           <div>
-            <label className="block mb-1 font-medium text-gray-300">Full Name</label>
+            <label className="block mb-1 font-medium text-gray-300">
+              Full Name
+            </label>
             <input
               type="text"
               name="name"
@@ -75,7 +76,9 @@ export default function Signup() {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-300">Email</label>
+            <label className="block mb-1 font-medium text-gray-300">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -87,7 +90,9 @@ export default function Signup() {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-300">Password</label>
+            <label className="block mb-1 font-medium text-gray-300">
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -99,7 +104,9 @@ export default function Signup() {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-300">Confirm Password</label>
+            <label className="block mb-1 font-medium text-gray-300">
+              Confirm Password
+            </label>
             <input
               type="password"
               name="confirmPassword"
@@ -117,14 +124,13 @@ export default function Signup() {
           >
             Sign Up
           </button>
-
         </div>
 
         <p className="text-center mt-4 text-sm text-gray-400">
           Already have an account?
-          <a href="/login" className="text-blue-400 font-medium ml-1">
+          <Link to="/login" className="text-blue-400 font-medium ml-1">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>
