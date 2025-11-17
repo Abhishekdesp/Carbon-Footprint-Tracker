@@ -14,11 +14,14 @@ const Insights = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/insights", {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/footprint/insights`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       const data = await response.json();
       setInsights(data);
@@ -32,11 +35,14 @@ const Insights = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/tips", {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/footprint/tips`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       const data = await response.json();
       setTips(data.tips);
@@ -48,7 +54,9 @@ const Insights = () => {
   if (!insights) {
     return (
       <div className="p-4 bg-gray-900 rounded-xl border border-green-600 shadow-md">
-        <h2 className="text-xl font-semibold text-green-300 mb-3">Quick Insights 🌍</h2>
+        <h2 className="text-xl font-semibold text-green-300 mb-3">
+          Quick Insights 🌍
+        </h2>
         <p className="text-green-100">Loading insights...</p>
       </div>
     );

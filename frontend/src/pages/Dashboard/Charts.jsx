@@ -25,14 +25,18 @@ const Charts = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8000/footprint/weekly-chart", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/footprint/weekly-chart`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (!res.ok) {
         console.error("Backend error:", await res.text());
         return;
       }
+
       const data = await res.json();
       setWeeklyData(data);
     } catch (err) {
@@ -46,7 +50,7 @@ const Charts = () => {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://localhost:8000/footprint/category-breakdown",
+        `${import.meta.env.VITE_API_URL}/footprint/category-breakdown`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

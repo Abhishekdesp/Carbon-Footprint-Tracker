@@ -14,9 +14,12 @@ export default function Profile() {
 
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:8000/dashboard", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/dashboard`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (!res.ok) return navigate("/login");
 
@@ -31,7 +34,11 @@ export default function Profile() {
   }, []);
 
   if (!user)
-    return <div className="min-h-screen flex items-center justify-center text-xl">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl">
+        Loading...
+      </div>
+    );
 
   // Open edit modal
   const openEdit = () => {
@@ -44,14 +51,17 @@ export default function Profile() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch("http://localhost:8000/update-profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/update-profile`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
       const data = await res.json();
 
@@ -69,9 +79,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-
       <div className="bg-white shadow-md p-6 rounded-2xl max-w-xl mx-auto">
-
         <h1 className="text-3xl font-bold mb-6 text-green-700 text-center">
           👤 User Profile
         </h1>
@@ -85,8 +93,12 @@ export default function Profile() {
 
         {/* Info */}
         <div className="space-y-4 text-lg text-gray-700">
-          <p><span className="font-semibold">Name:</span> {user.name}</p>
-          <p><span className="font-semibold">Email:</span> {user.email}</p>
+          <p>
+            <span className="font-semibold">Name:</span> {user.name}
+          </p>
+          <p>
+            <span className="font-semibold">Email:</span> {user.email}
+          </p>
         </div>
 
         {/* Edit Button */}
@@ -104,14 +116,15 @@ export default function Profile() {
       {editOpen && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-xl shadow-xl w-96">
-
             <h2 className="text-xl font-bold mb-4">Edit Profile</h2>
 
             <div className="space-y-4">
               <input
                 type="text"
                 value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, name: e.target.value })
+                }
                 className="w-full p-2 border rounded-lg"
                 placeholder="Name"
               />
@@ -119,7 +132,9 @@ export default function Profile() {
               <input
                 type="email"
                 value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, email: e.target.value })
+                }
                 className="w-full p-2 border rounded-lg"
                 placeholder="Email"
               />
@@ -140,11 +155,9 @@ export default function Profile() {
                 Save
               </button>
             </div>
-
           </div>
         </div>
       )}
-
     </div>
   );
 }

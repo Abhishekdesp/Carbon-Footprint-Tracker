@@ -19,36 +19,39 @@ const Transportation = () => {
       Train: 0.041,
     };
 
-    // road transportation
+    // Road transportation emissions
     if (fuel && distance) {
       total += distance * emissionRates[fuel];
     }
 
-    // flights
-    const flightEmission = flights * 150; // approx kg/trip
+    // Flights (approx kg/trip)
+    const flightEmission = flights * 150;
     total += flightEmission;
 
     const formatted = total.toFixed(2);
     setResult(formatted);
 
-    // send to backend
+    // Send to backend
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/transportation", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-        vehicle,
-        fuel,
-        distance: Number(distance),
-        flights: Number(flights),
-        emissions: Number(formatted),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/footprint/transportation`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            vehicle,
+            fuel,
+            distance: Number(distance),
+            flights: Number(flights),
+            emissions: Number(formatted),
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -68,7 +71,6 @@ const Transportation = () => {
       <h1 className="text-3xl font-bold text-green-400 mb-4">Transportation Footprint</h1>
 
       <div className="bg-gray-800/50 p-6 rounded-xl border border-green-600/40">
-        
         <div className="space-y-3">
           <select
             className="w-full p-3 bg-gray-900/60 rounded-lg"

@@ -23,21 +23,24 @@ const Lifestyle = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:8000/footprint/lifestyle", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          clothes: Number(clothes),
-          gadgets: Number(gadgets),
-          plastic: Number(plastic),
-          recycle: Number(recycle),
-          water: Number(water),
-          emissions: Number(formatted),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/footprint/lifestyle`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            clothes: Number(clothes),
+            gadgets: Number(gadgets),
+            plastic: Number(plastic),
+            recycle: Number(recycle),
+            water: Number(water),
+            emissions: Number(formatted),
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -57,7 +60,6 @@ const Lifestyle = () => {
       <h1 className="text-3xl font-bold text-green-400 mb-4">Lifestyle Impact</h1>
 
       <div className="bg-gray-800/50 p-6 rounded-xl border border-green-600/40">
-        
         <div className="space-y-3">
           <input
             type="number"

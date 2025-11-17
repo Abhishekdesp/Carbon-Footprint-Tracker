@@ -26,11 +26,14 @@ export default function Dashboard() {
     // Fetch user data
     const fetchUser = async () => {
       try {
-        const response = await fetch("${import.meta.env.VITE_API_URL}/dashboard", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/dashboard`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           localStorage.removeItem("token");
@@ -51,11 +54,14 @@ export default function Dashboard() {
     // Fetch Summary
     const fetchSummary = async () => {
       try {
-        const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/summary", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/footprint/summary`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await response.json();
         setSummary(data);
@@ -68,9 +74,12 @@ export default function Dashboard() {
     // Fetch streak + badge
     const fetchReward = async () => {
       try {
-        const response = await fetch("http://localhost:8000/rewards", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/rewards`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -91,7 +100,6 @@ export default function Dashboard() {
 
   return (
     <div className="w-full min-h-screen bg-gray-100 p-6">
-
       {/* Top Header */}
       <div className="flex flex-col mb-6">
         <h1 className="text-2xl font-semibold text-gray-800">
@@ -109,10 +117,10 @@ export default function Dashboard() {
       </div>
 
       {/* Summary Cards */}
-      <Summary 
-        today={summary.today} 
-        week={summary.week} 
-        month={summary.month} 
+      <Summary
+        today={summary.today}
+        week={summary.week}
+        month={summary.month}
       />
 
       {/* Insights & Charts */}

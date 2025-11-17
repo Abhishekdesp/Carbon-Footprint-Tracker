@@ -7,31 +7,33 @@ const Electricity = () => {
   const [result, setResult] = useState(null);
 
   const calculateEnergy = async () => {
-    const electricityEmission = units * 0.85; // kg per kWh
-    const lpgEmission = lpg * 42; // kg per cylinder
-    const acEmission = acHours * 1.5 * 30; // per month
+    const electricityEmission = units * 0.85; 
+    const lpgEmission = lpg * 42;
+    const acEmission = acHours * 1.5 * 30;
 
     const total = electricityEmission + lpgEmission + acEmission;
     const formatted = total.toFixed(2);
     setResult(formatted);
 
-    // send to backend
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/electricity", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          units: Number(units),
-          lpg: Number(lpg),
-          acHours: Number(acHours),
-          emissions: Number(formatted),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/footprint/electricity`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            units: Number(units),
+            lpg: Number(lpg),
+            acHours: Number(acHours),
+            emissions: Number(formatted),
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -51,7 +53,6 @@ const Electricity = () => {
       <h1 className="text-3xl font-bold text-green-400 mb-4">Home Energy Usage</h1>
 
       <div className="bg-gray-800/50 p-6 rounded-xl border border-green-600/40">
-        
         <div className="space-y-3">
           <input
             type="number"
