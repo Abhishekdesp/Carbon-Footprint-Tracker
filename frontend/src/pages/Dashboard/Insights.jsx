@@ -14,7 +14,7 @@ const Insights = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:8000/footprint/insights", {
+      const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/insights", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -32,7 +32,7 @@ const Insights = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:8000/footprint/tips", {
+      const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/tips", {
         headers: {
           Authorization: `Bearer ${token}`
         }

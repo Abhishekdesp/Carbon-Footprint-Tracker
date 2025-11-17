@@ -26,7 +26,7 @@ export default function Dashboard() {
     // Fetch user data
     const fetchUser = async () => {
       try {
-        const response = await fetch("http://localhost:8000/dashboard", {
+        const response = await fetch("${import.meta.env.VITE_API_URL}/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -51,7 +51,7 @@ export default function Dashboard() {
     // Fetch Summary
     const fetchSummary = async () => {
       try {
-        const response = await fetch("http://localhost:8000/footprint/summary", {
+        const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/summary", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

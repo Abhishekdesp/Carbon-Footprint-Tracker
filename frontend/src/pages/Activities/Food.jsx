@@ -33,7 +33,7 @@ const Food = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:8000/footprint/food", {
+      const response = await fetch("${import.meta.env.VITE_API_URL}/footprint/food", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
