@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+console.log("API URL =", import.meta.env.VITE_API_URL);
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // If user is already logged in → redirect to dashboard
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) navigate("/dashboard");
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    console.log("LOGIN BUTTON CLICKED");
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/login`
-, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       const data = await response.json();
 
@@ -43,9 +46,9 @@ const Login = () => {
     <div className="min-h-screen w-screen flex items-center justify-center 
       bg-gradient-to-br from-green-900 via-blue-800 to-black p-4">
 
-      <div className="bg-gray-900 bg-opacity-80 border border-green-500 
-        rounded-xl shadow-xl p-6 w-full max-w-sm">
-        
+      <div className="bg-gray-900 border border-green-500 
+        rounded-xl shadow-xl p-6 w-full max-w-sm pointer-events-auto">
+
         <h1 className="text-3xl font-bold text-green-300 text-center mb-2">
           Carbon Footprint Tracker 🌱
         </h1>
@@ -54,7 +57,7 @@ const Login = () => {
           Measure • Reduce • Sustain
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-4">
           <input
             type="email"
             placeholder="Email address"
@@ -78,14 +81,15 @@ const Login = () => {
           />
 
           <button
-            type="submit"
+            type="button"
+            onClick={handleSubmit}
             className="w-full py-3 bg-gradient-to-r from-green-500 
             via-blue-500 to-green-600 text-white font-semibold 
             rounded-lg hover:scale-105 transition-transform"
           >
             Login
           </button>
-        </form>
+        </div>
 
         <div className="mt-4 text-center">
           <Link
