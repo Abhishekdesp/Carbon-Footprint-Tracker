@@ -35,6 +35,20 @@ mongoose
 // MODELS
 const User = require("./models/User");
 const Footprint = require("./models/Footprint");
+const multer = require("multer");
+const path = require("path");
+
+// serve uploaded files
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// simple local storage for uploads (swap for S3 in prod)
+const uploadDir = path.join(__dirname, "uploads");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) =>
+    cb(null, `${Date.now()}-${file.originalname.replace(/\s+/g, "_")}`)
+});
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } }); // 5MB
 
 // -----------------------------
 // JWT
@@ -195,6 +209,58 @@ app.get("/footprint/summary", authenticateToken, async (req, res) => {
 // -----------------------------
 // FOOTPRINT: TRANSPORTATION
 // -----------------------------
+// -----------------------------
+// HEALTH CHECK
+// -----------------------------
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    uptime: process.uptime(),
+    mongoState: mongoose.connection.readyState // 0: disconnected, 1: connected
+  });
+});
+
+// IMAGE UPLOAD (protected)
+app.post("/upload", authenticateToken, upload.single("photo"), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+  res.json({
+    message: "Uploaded",
+    file: {
+      url: `/uploads/${req.file.filename}`,
+      size: req.file.size,
+      mime: req.file.mimetype
+    }
+  });
+});
+
+// SIMPLE RECOMMENDATION ENGINE (proof of concept)
+app.get("/recommendations", authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    const entries = await Footprint.find({ userId, date: { $gte: monthStart } });
+    let transport = 0, electricity = 0, food = 0, lifestyle = 0;
+    entries.forEach(e => {
+      transport += e.transportation?.emissions || 0;
+      electricity += e.electricity?.emissions || 0;
+      food += e.food?.emissions || 0;
+      lifestyle += e.lifestyle?.emissions || 0;
+    });
+
+    const tips = [];
+    if (transport > 50) tips.push("Consider replacing a weekly car trip with public transit or cycling.");
+    if (electricity > 80) tips.push("Lower AC thermostat by 1–2°C and seal drafts to save energy.");
+    if (food > 60) tips.push("Add one more plant-based meal per week to reduce food emissions.");
+    if (lifestyle > 20) tips.push("Repair or donate items instead of buying new to cut embodied emissions.");
+
+    res.json({ transport, electricity, food, lifestyle, tips });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.post("/footprint/transportation", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
