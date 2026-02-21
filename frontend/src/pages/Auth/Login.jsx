@@ -8,8 +8,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-
-
   const handleSubmit = async () => {
     console.log("LOGIN BUTTON CLICKED");
 

@@ -37,7 +37,7 @@ export default function Signup() {
       if (response.ok) {
         localStorage.setItem("token", data.token);
         alert("Signup successful!");
-        window.location.href = "/dashboard";
+        window.location.href = "/";
       } else {
         alert(data.error || "Signup failed");
       }
@@ -128,7 +128,7 @@ export default function Signup() {
 
         <p className="text-center mt-4 text-sm text-gray-400">
           Already have an account?
-          <Link to="/login" className="text-blue-400 font-medium ml-1">
+          <Link to="/" className="text-blue-400 font-medium ml-1">
             Login
           </Link>
         </p>
