@@ -169,6 +169,37 @@ app.get("/dashboard", authenticateToken, async (req, res) => {
   }
 });
 
+// UPDATE PROFILE
+app.put("/update-profile", authenticateToken, async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    if (!name || !email) {
+      return res.status(400).json({ error: "Name and email are required" });
+    }
+
+    // Check if email is already in use by another user
+    const existingUser = await User.findOne({ email, _id: { $ne: req.user.id } });
+    if (existingUser) {
+      return res.status(400).json({ error: "Email is already registered by another account" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { name, email },
+      { new: true }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ message: "Profile updated", user: updatedUser });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 // -----------------------------
 // FOOTPRINT: SUMMARY
 // -----------------------------
@@ -221,16 +252,21 @@ app.get("/health", (req, res) => {
 });
 
 // IMAGE UPLOAD (protected)
-app.post("/upload", authenticateToken, upload.single("photo"), (req, res) => {
-  if (!req.file) return res.status(400).json({ error: "No file uploaded" });
-  res.json({
-    message: "Uploaded",
-    file: {
-      url: `/uploads/${req.file.filename}`,
-      size: req.file.size,
-      mime: req.file.mimetype
-    }
-  });
+app.post("/upload", authenticateToken, upload.single("photo"), (req, res, next) => {
+  try {
+    console.log('Upload handler invoked for user:', req.user?.id);
+    if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+    res.json({
+      message: "Uploaded",
+      file: {
+        url: `/uploads/${req.file.filename}`,
+        size: req.file.size,
+        mime: req.file.mimetype
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 // SIMPLE RECOMMENDATION ENGINE (proof of concept)
@@ -580,4 +616,16 @@ app.get("/rewards", authenticateToken, async (req, res) => {
 });
 
 // -----------------------------
+// Global error handler (returns JSON instead of HTML pages)
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err && err.stack ? err.stack : err);
+  if (res.headersSent) return next(err);
+  // Multer errors
+  if (err && err.name === 'MulterError') {
+    return res.status(400).json({ error: err.message });
+  }
+  const message = (err && err.message) || 'Internal Server Error';
+  res.status(err && err.status ? err.status : 500).json({ error: message });
+});
+
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));

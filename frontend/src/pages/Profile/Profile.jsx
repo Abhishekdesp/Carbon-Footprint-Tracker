@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UploadPhoto from "../../components/UploadPhoto";
+import Recommendations from "../../components/Recommendations";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -25,13 +27,13 @@ export default function Profile() {
 
         const data = await res.json();
         setUser(data.user);
-      } catch (err) {
+      } catch {
         navigate("/login");
       }
     };
 
     fetchUser();
-  }, []);
+  }, [navigate]);
 
   if (!user)
     return (
@@ -72,7 +74,7 @@ export default function Profile() {
       } else {
         alert(data.error);
       }
-    } catch (err) {
+    } catch {
       alert("Error updating profile");
     }
   };
@@ -110,6 +112,10 @@ export default function Profile() {
             Edit Profile
           </button>
         </div>
+
+  {/* Upload & Tips */}
+  <UploadPhoto />
+  <Recommendations />
       </div>
 
       {/* Edit Modal */}

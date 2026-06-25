@@ -93,7 +93,7 @@ export default function Dashboard() {
     fetchUser();
     fetchSummary();
     fetchReward();
-  }, []);
+  }, [navigate]);
 
   if (!user || !reward)
     return <div className="p-6 text-xl">Loading Dashboard...</div>;
