@@ -99,21 +99,25 @@ export default function Dashboard() {
     return <div className="p-6 text-xl">Loading Dashboard...</div>;
 
   return (
-    <div className="w-full min-h-screen bg-gray-100 p-6">
+    <div className="w-full min-h-screen bg-gray-50 p-6">
       {/* Top Header */}
-      <div className="flex flex-col mb-6">
-        <h1 className="text-2xl font-semibold text-gray-800">
-          Welcome, {user.name} 🌱
-        </h1>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 pb-6 border-b border-gray-100">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Welcome back, {user.name} 🌱
+          </h1>
+          <p className="text-gray-500 mt-1">Here is your carbon footprint breakdown and sustainability score.</p>
+        </div>
 
         {/* STREAK + BADGE SECTION */}
-        <p className="text-lg text-green-700 mt-2">
-          🔥 <b>Streak:</b> {reward.streak} days
-        </p>
-
-        <p className="text-lg text-green-700 mt-2">
-          🏆 <b>Badge:</b> {reward.badge}
-        </p>
+        <div className="flex gap-3 mt-4 md:mt-0">
+          <span className="flex items-center gap-1.5 bg-orange-50 text-orange-700 border border-orange-100 px-3.5 py-1.5 rounded-full text-sm font-semibold shadow-sm">
+            🔥 <b>Streak:</b> {reward.streak} days
+          </span>
+          <span className="flex items-center gap-1.5 bg-green-50 text-green-700 border border-green-100 px-3.5 py-1.5 rounded-full text-sm font-semibold shadow-sm">
+            🏆 <b>Badge:</b> {reward.badge}
+          </span>
+        </div>
       </div>
 
       {/* Summary Cards */}

@@ -23,16 +23,16 @@ export default function Recommendations() {
   if (!data) return <div>No tips available</div>;
 
   return (
-    <div className="mt-6 bg-white p-4 rounded shadow">
-      <h3 className="text-lg font-semibold mb-2">Personalized Tips</h3>
-      <ul className="list-disc list-inside space-y-1">
+    <div className="mt-6 bg-emerald-50/60 border border-emerald-100 p-5 rounded-xl">
+      <h3 className="text-lg font-bold text-emerald-800 mb-3">Personalized Tips</h3>
+      <ul className="list-disc list-inside space-y-2 text-emerald-850 text-sm">
         {data.tips?.map((t, i) => (
           <li key={i}>{t}</li>
         ))}
       </ul>
-      <div className="text-sm text-gray-500 mt-2">
-        <div>Transport: {data.transport} kg</div>
-        <div>Electricity: {data.electricity} kg</div>
+      <div className="text-xs text-emerald-700 mt-4 pt-3 border-t border-emerald-100 flex justify-between font-semibold">
+        <div>🚗 Transport: {data.transport} kg</div>
+        <div>💡 Electricity: {data.electricity} kg</div>
       </div>
     </div>
   );

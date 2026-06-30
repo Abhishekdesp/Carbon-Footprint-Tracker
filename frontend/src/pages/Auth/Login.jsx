@@ -39,16 +39,16 @@ const Login = () => {
 
   return (
     <div className="min-h-screen w-screen flex items-center justify-center 
-      bg-gradient-to-br from-green-900 via-blue-800 to-black p-4">
+      bg-gradient-to-br from-green-50 via-white to-emerald-50 p-4">
 
-      <div className="bg-gray-900 border border-green-500 
-        rounded-xl shadow-xl p-6 w-full max-w-sm pointer-events-auto">
+      <div className="bg-white border border-gray-100 
+        rounded-2xl shadow-xl p-8 w-full max-w-sm pointer-events-auto">
 
-        <h1 className="text-3xl font-bold text-green-300 text-center mb-2">
+        <h1 className="text-3xl font-bold text-green-800 text-center mb-2">
           Carbon Footprint Tracker 🌱
         </h1>
 
-        <p className="text-green-100 text-center mb-6">
+        <p className="text-gray-500 text-center mb-6">
           Measure • Reduce • Sustain
         </p>
 
@@ -59,9 +59,9 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-3 bg-gray-800/60 text-green-100 
-            border border-green-400/40 rounded-lg focus:ring-2 
-            focus:ring-green-500"
+            className="w-full px-4 py-3 bg-white text-gray-800 
+            border border-gray-200 rounded-lg focus:ring-2 
+            focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
           />
 
           <input
@@ -70,17 +70,16 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-3 bg-gray-800/60 text-green-100 
-            border border-blue-400/40 rounded-lg focus:ring-2 
-            focus:ring-blue-500"
+            className="w-full px-4 py-3 bg-white text-gray-800 
+            border border-gray-200 rounded-lg focus:ring-2 
+            focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
           />
 
           <button
             type="button"
             onClick={handleSubmit}
-            className="w-full py-3 bg-gradient-to-r from-green-500 
-            via-blue-500 to-green-600 text-white font-semibold 
-            rounded-lg hover:scale-105 transition-transform"
+            className="w-full py-3 bg-green-600 text-white font-semibold 
+            rounded-lg hover:bg-green-700 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-green-600/10"
           >
             Login
           </button>
@@ -89,17 +88,17 @@ const Login = () => {
         <div className="mt-4 text-center">
           <Link
             to="/forgot-password"
-            className="text-blue-300 text-sm hover:underline"
+            className="text-green-600 text-sm hover:underline hover:text-green-700"
           >
             Forgot Password?
           </Link>
         </div>
 
-        <div className="mt-2 text-center text-green-200 text-sm">
+        <div className="mt-2 text-center text-gray-600 text-sm">
           Don’t have an account?{" "}
           <Link
             to="/signup"
-            className="text-green-400 font-semibold hover:underline"
+            className="text-green-600 font-semibold hover:underline hover:text-green-700"
           >
             Sign up
           </Link>

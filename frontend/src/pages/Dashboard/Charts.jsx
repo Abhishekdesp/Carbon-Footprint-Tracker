@@ -70,8 +70,8 @@ const Charts = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-900 rounded-xl border border-purple-600 shadow-md">
-      <h2 className="text-xl font-semibold text-purple-300 mb-4">
+    <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
+      <h2 className="text-xl font-bold text-gray-900 mb-4">
         Weekly Carbon Footprint Chart 📈
       </h2>
 
@@ -81,29 +81,31 @@ const Charts = () => {
             <Line
               type="monotone"
               dataKey="carbon"
-              stroke="#4ade80"
+              stroke="#10b981"
               strokeWidth={3}
+              dot={{ r: 4 }}
+              activeDot={{ r: 6 }}
             />
-            <CartesianGrid stroke="#555" />
-            <XAxis dataKey="day" stroke="#aaa" />
-            <YAxis stroke="#aaa" />
-            <Tooltip />
+            <CartesianGrid stroke="#f3f4f6" strokeDasharray="3 3" />
+            <XAxis dataKey="day" stroke="#6b7280" fontSize={12} tickLine={false} />
+            <YAxis stroke="#6b7280" fontSize={12} tickLine={false} />
+            <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }} />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      <h2 className="text-xl font-semibold text-orange-300 mt-8 mb-3">
+      <h2 className="text-xl font-bold text-gray-900 mt-8 mb-3">
         Category Breakdown (Monthly) 📊
       </h2>
 
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={categoryData}>
-            <CartesianGrid stroke="#555" />
-            <XAxis dataKey="category" stroke="#aaa" />
-            <YAxis stroke="#aaa" />
-            <Tooltip />
-            <Bar dataKey="value" fill="#60a5fa" />
+            <CartesianGrid stroke="#f3f4f6" strokeDasharray="3 3" />
+            <XAxis dataKey="category" stroke="#6b7280" fontSize={12} tickLine={false} />
+            <YAxis stroke="#6b7280" fontSize={12} tickLine={false} />
+            <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }} />
+            <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "start:backend": "npm start --prefix backend"
+  },
   "dependencies": {
     "jsonwebtoken": "^9.0.2",
     "react-router-dom": "^6.30.1"

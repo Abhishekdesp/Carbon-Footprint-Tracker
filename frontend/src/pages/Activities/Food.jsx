@@ -65,59 +65,73 @@ const Food = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-br from-blue-900 via-gray-900 to-black text-green-200">
-      <h1 className="text-3xl font-bold text-green-400 mb-4">Food & Diet Impact</h1>
+    <div className="min-h-screen p-6 bg-gray-50 text-gray-800">
+      <div className="max-w-xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Food & Diet Impact</h1>
 
-      <div className="bg-gray-800/50 p-6 rounded-xl border border-green-600/40">
-        <div className="space-y-3">
-          <select
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-            value={diet}
-            onChange={(e) => setDiet(e.target.value)}
-          >
-            <option value="">Select Meal Type</option>
-            <option>Veg</option>
-            <option>Non-Veg</option>
-            <option>Vegan</option>
-          </select>
+        <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
+          <div className="space-y-4">
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Meal / Diet Type</label>
+              <select
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+                value={diet}
+                onChange={(e) => setDiet(e.target.value)}
+              >
+                <option value="">Select Meal Type</option>
+                <option>Veg</option>
+                <option>Non-Veg</option>
+                <option>Vegan</option>
+              </select>
+            </div>
 
-          <input
-            type="number"
-            placeholder="Dairy (cups/day)"
-            value={dairy}
-            onChange={(e) => setDairy(e.target.value)}
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-          />
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Dairy Intake (cups/day)</label>
+              <input
+                type="number"
+                placeholder="e.g. 2"
+                value={dairy}
+                onChange={(e) => setDairy(e.target.value)}
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+              />
+            </div>
 
-          <input
-            type="number"
-            placeholder="Snacks (per day)"
-            value={snacks}
-            onChange={(e) => setSnacks(e.target.value)}
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-          />
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Snacks Consumption (per day)</label>
+              <input
+                type="number"
+                placeholder="e.g. 1"
+                value={snacks}
+                onChange={(e) => setSnacks(e.target.value)}
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+              />
+            </div>
 
-          <input
-            type="number"
-            placeholder="Food Waste (kg/month)"
-            value={waste}
-            onChange={(e) => setWaste(e.target.value)}
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-          />
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Food Waste (kg/month)</label>
+              <input
+                type="number"
+                placeholder="e.g. 5"
+                value={waste}
+                onChange={(e) => setWaste(e.target.value)}
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+              />
+            </div>
 
-          <button
-            onClick={calculateFood}
-            className="w-full py-3 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold"
-          >
-            Calculate
-          </button>
-        </div>
-
-        {result && (
-          <div className="mt-6 text-xl text-green-300 font-bold">
-            🍽️ Monthly Food Footprint: {result} kg CO₂
+            <button
+              onClick={calculateFood}
+              className="w-full py-3 mt-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold shadow-lg shadow-green-600/10 transition-all hover:scale-[1.01]"
+            >
+              Calculate Emissions
+            </button>
           </div>
-        )}
+
+          {result && (
+            <div className="mt-8 p-4 bg-green-50 border border-green-100 rounded-xl text-green-800 font-bold text-center">
+              🍽️ Monthly Food Footprint: <span className="text-2xl ml-1">{result}</span> kg CO₂
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

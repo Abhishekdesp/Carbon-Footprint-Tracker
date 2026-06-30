@@ -50,19 +50,19 @@ export default function Signup() {
   return (
     <div
       className="min-h-screen w-screen flex items-center justify-center 
-      bg-gradient-to-br from-green-900 via-blue-800 to-black p-4"
+      bg-gradient-to-br from-green-50 via-white to-emerald-50 p-4"
     >
       <div
-        className="bg-gray-900 border border-green-500 
-        rounded-xl shadow-xl p-6 w-full max-w-sm pointer-events-auto"
+        className="bg-white border border-gray-100 
+        rounded-2xl shadow-xl p-8 w-full max-w-sm pointer-events-auto"
       >
-        <h2 className="text-2xl font-bold text-center mb-6 text-white">
+        <h2 className="text-2xl font-bold text-center mb-6 text-green-800">
           Create Account
         </h2>
 
         <div className="space-y-4">
           <div>
-            <label className="block mb-1 font-medium text-gray-300">
+            <label className="block mb-1 font-medium text-gray-700">
               Full Name
             </label>
             <input
@@ -71,12 +71,12 @@ export default function Signup() {
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full border rounded-lg p-2"
+              className="w-full border border-gray-200 rounded-lg p-2.5 bg-white text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
             />
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-300">
+            <label className="block mb-1 font-medium text-gray-700">
               Email
             </label>
             <input
@@ -85,12 +85,12 @@ export default function Signup() {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full border rounded-lg p-2"
+              className="w-full border border-gray-200 rounded-lg p-2.5 bg-white text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
             />
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-300">
+            <label className="block mb-1 font-medium text-gray-700">
               Password
             </label>
             <input
@@ -99,12 +99,12 @@ export default function Signup() {
               required
               value={formData.password}
               onChange={handleChange}
-              className="w-full border rounded-lg p-2"
+              className="w-full border border-gray-200 rounded-lg p-2.5 bg-white text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
             />
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-300">
+            <label className="block mb-1 font-medium text-gray-700">
               Confirm Password
             </label>
             <input
@@ -113,22 +113,22 @@ export default function Signup() {
               required
               value={formData.confirmPassword}
               onChange={handleChange}
-              className="w-full border rounded-lg p-2"
+              className="w-full border border-gray-200 rounded-lg p-2.5 bg-white text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
             />
           </div>
 
           <button
             type="button"
             onClick={handleSubmit}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-green-600/10"
           >
             Sign Up
           </button>
         </div>
 
-        <p className="text-center mt-4 text-sm text-gray-400">
+        <p className="text-center mt-4 text-sm text-gray-500">
           Already have an account?
-          <Link to="/" className="text-blue-400 font-medium ml-1">
+          <Link to="/" className="text-green-600 font-semibold ml-1 hover:underline hover:text-green-700">
             Login
           </Link>
         </p>

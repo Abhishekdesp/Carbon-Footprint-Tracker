@@ -56,64 +56,81 @@ const Lifestyle = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-br from-green-900 via-black to-blue-900 text-green-200">
-      <h1 className="text-3xl font-bold text-green-400 mb-4">Lifestyle Impact</h1>
+    <div className="min-h-screen p-6 bg-gray-50 text-gray-800">
+      <div className="max-w-xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Lifestyle Impact</h1>
 
-      <div className="bg-gray-800/50 p-6 rounded-xl border border-green-600/40">
-        <div className="space-y-3">
-          <input
-            type="number"
-            placeholder="Clothes Purchased (per month)"
-            value={clothes}
-            onChange={(e) => setClothes(e.target.value)}
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-          />
+        <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
+          <div className="space-y-4">
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Clothes Purchased (per month)</label>
+              <input
+                type="number"
+                placeholder="e.g. 2"
+                value={clothes}
+                onChange={(e) => setClothes(e.target.value)}
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+              />
+            </div>
 
-          <input
-            type="number"
-            placeholder="Gadgets Bought (per year)"
-            value={gadgets}
-            onChange={(e) => setGadgets(e.target.value)}
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-          />
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Gadgets Bought (per year)</label>
+              <input
+                type="number"
+                placeholder="e.g. 1"
+                value={gadgets}
+                onChange={(e) => setGadgets(e.target.value)}
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+              />
+            </div>
 
-          <input
-            type="number"
-            placeholder="Plastic Waste (kg/month)"
-            value={plastic}
-            onChange={(e) => setPlastic(e.target.value)}
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-          />
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Plastic Waste (kg/month)</label>
+              <input
+                type="number"
+                placeholder="e.g. 4"
+                value={plastic}
+                onChange={(e) => setPlastic(e.target.value)}
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+              />
+            </div>
 
-          <input
-            type="number"
-            placeholder="Recycling (kg/month)"
-            value={recycle}
-            onChange={(e) => setRecycle(e.target.value)}
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-          />
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Recycling (kg/month)</label>
+              <input
+                type="number"
+                placeholder="e.g. 10"
+                value={recycle}
+                onChange={(e) => setRecycle(e.target.value)}
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+              />
+            </div>
 
-          <input
-            type="number"
-            placeholder="Water Usage (L/day)"
-            value={water}
-            onChange={(e) => setWater(e.target.value)}
-            className="w-full p-3 bg-gray-900/60 rounded-lg"
-          />
+            <div>
+              <label className="block mb-1.5 font-medium text-gray-700">Water Usage (L/day)</label>
+              <input
+                type="number"
+                placeholder="e.g. 150"
+                value={water}
+                onChange={(e) => setWater(e.target.value)}
+                className="w-full p-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500/20 focus:border-green-600 outline-none transition-all"
+              />
+            </div>
 
-          <button
-            onClick={calculateLifestyle}
-            className="w-full py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold"
-          >
-            Calculate
-          </button>
-        </div>
-
-        {result && (
-          <div className="mt-6 text-xl text-green-300 font-bold">
-            🌿 Sustainability Index: {result} pts
+            <button
+              onClick={calculateLifestyle}
+              className="w-full py-3 mt-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold shadow-lg shadow-green-600/10 transition-all hover:scale-[1.01]"
+            >
+              Calculate Emissions
+            </button>
           </div>
-        )}
+
+          {result && (
+            <div className="mt-8 p-4 bg-green-50 border border-green-100 rounded-xl text-green-800 font-bold text-center">
+              🌿 Sustainability Index: <span className="text-2xl ml-1">{result}</span> pts
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
