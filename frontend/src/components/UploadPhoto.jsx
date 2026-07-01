@@ -16,9 +16,6 @@ export default function UploadPhoto() {
     e.preventDefault();
     if (!file) return setStatus("Select a file first");
 
-    const token = localStorage.getItem("token");
-    if (!token) return setStatus("Not authenticated");
-
     const form = new FormData();
     form.append("photo", file);
 
@@ -27,8 +24,8 @@ export default function UploadPhoto() {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
         body: form,
+        credentials: "include"
       });
 
       // safely handle JSON or plain text responses

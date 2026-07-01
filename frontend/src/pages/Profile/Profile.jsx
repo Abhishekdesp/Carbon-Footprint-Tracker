@@ -11,24 +11,21 @@ export default function Profile() {
 
   // Fetch user data
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return navigate("/login");
-
     const fetchUser = async () => {
       try {
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}/dashboard`,
           {
-            headers: { Authorization: `Bearer ${token}` },
+            credentials: "include"
           }
         );
 
-        if (!res.ok) return navigate("/login");
+        if (!res.ok) return navigate("/");
 
         const data = await res.json();
         setUser(data.user);
       } catch {
-        navigate("/login");
+        navigate("/");
       }
     };
 
@@ -50,18 +47,16 @@ export default function Profile() {
 
   // Handle saving
   const saveProfile = async () => {
-    const token = localStorage.getItem("token");
-
     try {
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/update-profile`,
         {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
           },
           body: JSON.stringify(form),
+          credentials: "include"
         }
       );
 

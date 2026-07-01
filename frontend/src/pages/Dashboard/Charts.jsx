@@ -23,12 +23,10 @@ const Charts = () => {
   // Fetch last 7-day footprint
   const fetchWeeklyChart = async () => {
     try {
-      const token = localStorage.getItem("token");
-
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/footprint/weekly-chart`,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          credentials: "include"
         }
       );
 
@@ -47,12 +45,10 @@ const Charts = () => {
   // Fetch monthly totals per category
   const fetchCategoryBreakdown = async () => {
     try {
-      const token = localStorage.getItem("token");
-
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/footprint/category-breakdown`,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          credentials: "include"
         }
       );
 

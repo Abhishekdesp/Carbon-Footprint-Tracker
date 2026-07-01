@@ -31,15 +31,12 @@ const Food = () => {
 
     // 🔥 Send to backend
     try {
-      const token = localStorage.getItem("token");
-
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/footprint/food`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             diet,
@@ -48,6 +45,7 @@ const Food = () => {
             waste: Number(waste),
             emissions: Number(formatted),
           }),
+          credentials: "include"
         }
       );
 

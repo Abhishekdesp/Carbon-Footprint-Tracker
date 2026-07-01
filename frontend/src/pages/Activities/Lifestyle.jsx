@@ -21,15 +21,12 @@ const Lifestyle = () => {
 
     // 🔥 Send lifestyle data to backend
     try {
-      const token = localStorage.getItem("token");
-
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/footprint/lifestyle`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             clothes: Number(clothes),
@@ -39,6 +36,7 @@ const Lifestyle = () => {
             water: Number(water),
             emissions: Number(formatted),
           }),
+          credentials: "include"
         }
       );
 

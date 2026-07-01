@@ -12,14 +12,10 @@ const Insights = () => {
   // -------- Fetch insights data --------
   const fetchInsights = async () => {
     try {
-      const token = localStorage.getItem("token");
-
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/footprint/insights`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          credentials: "include"
         }
       );
 
@@ -33,14 +29,10 @@ const Insights = () => {
   // -------- Fetch reduction tips --------
   const fetchTips = async () => {
     try {
-      const token = localStorage.getItem("token");
-
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/footprint/tips`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          credentials: "include"
         }
       );
 

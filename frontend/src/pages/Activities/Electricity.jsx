@@ -16,15 +16,12 @@ const Electricity = () => {
     setResult(formatted);
 
     try {
-      const token = localStorage.getItem("token");
-
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/footprint/electricity`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             units: Number(units),
@@ -32,6 +29,7 @@ const Electricity = () => {
             acHours: Number(acHours),
             emissions: Number(formatted),
           }),
+          credentials: "include"
         }
       );
 

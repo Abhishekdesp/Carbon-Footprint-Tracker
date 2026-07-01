@@ -16,28 +16,18 @@ export default function Dashboard() {
 
   // Check token + fetch user details
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
     // Fetch user data
     const fetchUser = async () => {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/dashboard`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            credentials: "include"
           }
         );
 
         if (!response.ok) {
-          localStorage.removeItem("token");
-          navigate("/login");
+          navigate("/");
           return;
         }
 
@@ -46,8 +36,7 @@ export default function Dashboard() {
 
       } catch (error) {
         console.error("Dashboard Error:", error);
-        localStorage.removeItem("token");
-        navigate("/login");
+        navigate("/");
       }
     };
 
@@ -57,9 +46,7 @@ export default function Dashboard() {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/footprint/summary`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            credentials: "include"
           }
         );
 
@@ -77,7 +64,7 @@ export default function Dashboard() {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/rewards`,
           {
-            headers: { Authorization: `Bearer ${token}` },
+            credentials: "include"
           }
         );
 

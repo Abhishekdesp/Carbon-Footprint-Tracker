@@ -5,11 +5,8 @@ export default function Recommendations() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return setLoading(false);
-
     fetch(`${import.meta.env.VITE_API_URL}/recommendations`, {
-      headers: { Authorization: `Bearer ${token}` },
+      credentials: "include"
     })
       .then((r) => r.json())
       .then((j) => {
